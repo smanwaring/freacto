@@ -8,8 +8,9 @@ import { Router, Route, browserHistory, IndexRoute, IndexRedirect } from 'react-
 import store from './store';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AuthService from './utils/AuthService';
 
-
+const auth = new AuthService('tI3Yb8b6o4t7iOXLO4vffTYVpsHptMjl', 'stephaniemanwaring.auth0.com');
 /*------ COMPONENTS/CONTAINERS ------ */
 import Root from './components/Root';
 import Homepage from './components/Homepage';
