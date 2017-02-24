@@ -40,7 +40,14 @@ questionsRouter.put('/current', (req, res, next) => {
 // create a question
 questionsRouter.post('/', (req, res, next) => {
   db.model('question').create(req.body)
-  .then(question => res.status(201).json(question))
+  .then(question => {
+    return db.model("answer").create({
+      content: req.body.answer,
+      questionID: question.id,
+      userId: req.body.userId
+    })
+  })
+  .then(createdAnswer => res.status(201).json(createdAnswer))
   .catch(next);
 })
 

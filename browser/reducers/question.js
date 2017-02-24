@@ -1,5 +1,30 @@
-import {SET_QUESTION, setQuestion} from '../components/Question';
+
 import axios from 'axios';
+import {SET_QUESTION, setQuestion} from '../components/Question';
+
+// constants
+const  QUESTION_POSTED = 'QUESTION_POSTED';
+
+
+// sync action creators
+export const questionPosted = (bool) => ({
+  type: QUESTION_POSTED,
+  bool
+});
+
+
+// async action creators
+export const postQuestion = questionDetails => dispatch => {
+  return axios.post('/api/question', questionDetails)
+  .then(res => {
+    if (res.status === 201){
+      dispatch(questionPosted(true));
+    } else {
+      dispatch(questionPosted(false));
+    }
+  })
+  .catch(err => console.error(err));
+};
 
 export const findQuestion = () => {
   return (dispatch) => {
@@ -15,6 +40,15 @@ export const findQuestion = () => {
   }
 }
 
+// login reducer
+export const questionPostedReducer = (state = true, action) => {
+  switch (action.type) {
+    case QUESTION_POSTED:
+      return action.bool;
+    default:
+      return state;
+  }
+};
 
 export const questionReducer = function(state = {}, action) {
 	switch (action.type){
