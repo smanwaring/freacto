@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Question from './Question';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Link } from 'react-router';
 
 
 class Homepage extends React.Component {
@@ -12,7 +13,7 @@ class Homepage extends React.Component {
                 <h1> Question Of The Day </h1>
                 <Question question={this.props.question}/>
                 <RaisedButton label="View Answer" />
-                <RaisedButton label="Create a Question" />
+                <Link to={'/createQuestion'}><RaisedButton label="Create a Question"/></Link>
             </div>
         );
     }

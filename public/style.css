@@ -21,3 +21,8 @@ body {
 .login-text {
   color: white;
 }
+
+.big-text {
+  font-size: 25px;
+  padding: 20px;
+}

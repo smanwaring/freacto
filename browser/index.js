@@ -17,10 +17,13 @@ const auth = new AuthService('tI3Yb8b6o4t7iOXLO4vffTYVpsHptMjl', 'stephaniemanwa
 import Root from './components/Root';
 import Homepage from './components/Homepage';
 import Login from './components/Login';
+import CreateQuestion from './components/CreateQuestion';
 
 
 /*--------- ACTION CREATORS --------- */
 import { findOrCreateUser } from './reducers/login';
+
+injectTapEventPlugin();
 
 /*--------- ON-ENTER HOOKS ---------- */
 const getQuestion = () => {
@@ -55,6 +58,7 @@ ReactDOM.render(
 				<Route path="/" component={Root} auth={auth}>
 					<Route path="/home" component={Homepage} onEnter={requireAuth} />
 					<Route path="/login" component={Login} />
+					<Route path="/createQuestion" component={CreateQuestion} />
 					<IndexRedirect to="/login" />
 				</Route>
 			</Router>
