@@ -31,6 +31,8 @@ const requireAuth = (nextState, replace) => {
 				email: user.email
 		};
 		store.dispatch(findOrCreateUser(userDetails))
+	}
+};
 
 ReactDOM.render(
   <Provider store={store}>
