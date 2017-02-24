@@ -16,6 +16,25 @@ questionsRouter.get('/:id', (req, res, next) => {
   .catch(next);
 })
 
+// get current question
+questionsRouter.get('/current', (req, res, next) => {
+  db.model('question').findOne({
+    where: { current: true}
+  }).then(question => res.json(question))
+  .catch(next);
+})
+
+// make a question the current question
+questionsRouter.put('/current', (req, res, next) => {
+  db.model('question').find({
+    where: { asked: false },
+    order: [ Sequeilze.fn('RAND')]
+  }).then(question => {
+    return question.update({ current: true, date: Date.now(), asked: true })
+  }).then(currentQuestion => res.status(201).json(currentQuestion))
+  .catch(next);
+})
+
 // create a question
 questionsRouter.post('/', (req, res, next) => {
   db.model('question').create(req.body)
