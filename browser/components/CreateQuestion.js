@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { postQuestion } from '../reducers/question';
 
 
@@ -22,6 +22,7 @@ class CreateQuestion extends React.Component {
       title: evt.target.title.value
     };
     this.props.submitQuestion(data);
+    browserHistory.replace('/home');
   }
 
     render() {

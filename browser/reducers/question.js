@@ -41,7 +41,7 @@ export const findQuestion = () => {
 }
 
 // login reducer
-export const questionPostedReducer = (state = true, action) => {
+export const questionPostedReducer = (state = null, action) => {
   switch (action.type) {
     case QUESTION_POSTED:
       return action.bool;

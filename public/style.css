@@ -26,3 +26,40 @@ body {
   font-size: 25px;
   padding: 20px;
 }
+
+.green {
+  color: lightgreen;
+  text-align: center;
+}
+
+.text-center{
+  text-align: center;
+  margin-top: 100px;
+}
+
+.question-title {
+  background-color: white;
+  color: black;
+  width: 500px;
+  height: 100px;;
+  margin-bottom: 20px;
+  margin-left: 30vw;
+  text-align: left;
+  padding: 20px;
+}
+
+.question-content {
+  background-color: white;
+  color: black;
+  width: 500px;
+  margin-left: 40%;
+  margin-bottom: 20px;
+  height: 200px;
+  margin-left: 30vw;
+  text-align: left;
+  padding: 20px;
+}
+
+.center {
+  text-align: center;
+}
