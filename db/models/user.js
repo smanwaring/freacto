@@ -8,6 +8,13 @@ const User = db.define('user', {
     validate: {
       notEmpty: true
     }
+  },
+  email: {
+    type: Sequeilze.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   }
 });
 
