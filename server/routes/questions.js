@@ -45,7 +45,7 @@ questionsRouter.post('/', (req, res, next) => {
   .then(question => {
     return db.model("answer").create({
       content: req.body.answer,
-      questionID: question.id,
+      questionId: question.id,
       userId: req.body.userId
     })
   })
