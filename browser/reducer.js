@@ -1,6 +1,6 @@
 import React from 'react';
 import {combineReducers} from 'redux';
-import {SET_QUESTION} from '../components/Question';
+import {SET_QUESTION} from './components/Question';
 
 const questionReducer = function(state = {}, action) {
 	switch (action.type){
