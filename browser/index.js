@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRoute, IndexRedirect } from 'react-router';
 import store from './store';
+import axios from 'axios';
+import setQuestion from './components/Question';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AuthService from './utils/AuthService';
@@ -20,8 +22,18 @@ import Login from './components/Login';
 /*--------- ACTION CREATORS --------- */
 import { findOrCreateUser } from './reducers/login';
 
-
 /*--------- ON-ENTER HOOKS ---------- */
+const getQuestion = () => {
+	axios.get('/current')
+	.then(res => {
+		if (!res.data) {
+			axios.put('/current')
+			.then(newRes => store.dispatch(setQuestion(newRes.data)))
+		} else { store.dispatch(setQuestion(res.data)); }
+	})
+	.catch(console.error("Can't get question"));
+}
+
 const requireAuth = (nextState, replace) => {
   if (!auth.loggedIn()) {
     replace({ pathname: '/login' });
@@ -40,7 +52,7 @@ ReactDOM.render(
 		<MuiThemeProvider>
 	    <Router history={browserHistory}>
 				<Route path="/" component={Root} auth={auth}>
-					<Route path="/home" component={Homepage} onEnter={requireAuth} />
+					<Route path="/home" component={Homepage} onEnter={requireAuth, getQuestion} />
 					<Route path="/login" component={Login} />
 					<IndexRedirect to="/login" />
 				</Route>
