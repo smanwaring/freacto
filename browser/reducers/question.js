@@ -5,6 +5,7 @@ export const findQuestion = () => {
   return (dispatch) => {
     axios.get('api/question/current')
     .then(res => {
+      console.log('RES DATA IN REDUCER', res.data);
       if (!res.data) {
         axios.put('api/question/current')
         .then(newRes => dispatch(setQuestion(newRes.data)))

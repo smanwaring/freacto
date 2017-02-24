@@ -45,7 +45,7 @@ app.use((err, req, res, next) => {
 
 server.listen(1337, function () {
     console.log('The server is listening on port 1337!');
-    db.sync({force: true})
+    db.sync()
       .then(function () {
       console.log('Oh and btw the postgres server is totally connected, too');
   });
