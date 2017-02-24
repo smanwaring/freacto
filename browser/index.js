@@ -45,6 +45,7 @@ const requireAuth = (nextState, replace) => {
 		};
 		store.dispatch(findOrCreateUser(userDetails))
 	}
+	getQuestion();
 };
 
 ReactDOM.render(
@@ -52,7 +53,7 @@ ReactDOM.render(
 		<MuiThemeProvider>
 	    <Router history={browserHistory}>
 				<Route path="/" component={Root} auth={auth}>
-					<Route path="/home" component={Homepage} onEnter={requireAuth, getQuestion} />
+					<Route path="/home" component={Homepage} onEnter={requireAuth} />
 					<Route path="/login" component={Login} />
 					<IndexRedirect to="/login" />
 				</Route>

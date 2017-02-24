@@ -11,11 +11,11 @@ export const setQuestion = (question) => {
   }
 }
 
-export default (props) => {
+export default (props) => (
   <div>
     <h3> {props.question.title} </h3>
     <section>
       {props.question.content}
     </section>
   </div>
-}
+)

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Question from './Question';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class Homepage extends React.Component {
@@ -10,7 +11,8 @@ class Homepage extends React.Component {
             <div>
                 <h1> Question Of The Day </h1>
                 <Question question={this.props.question}/>
-                <button> View Answer </button>
+                <RaisedButton label="View Answer" />
+                <RaisedButton label="Create a Question" />
             </div>
         );
     }
