@@ -13,9 +13,7 @@ export const setQuestion = (question) => {
 
 export default (props) => (
   <div>
-    <h3> {props.question.title} </h3>
-    <section>
-      {props.question.content}
-    </section>
+    <div className="question-title"> {props.question.title} </div>
+    <section className="question-content">{props.question.content}</section>
   </div>
 )
