@@ -15,10 +15,14 @@ import Root from './components/Root';
 import Homepage from './components/Homepage';
 
 const getQuestion = () => {
-	axios.get('/')
+	axios.get('/current')
 	.then(res => {
-		store.dispatch(setQuestion(res.data));
+		if (!res.data) {
+			axios.put('/current')
+			.then(newRes => store.dispatch(setQuestion(newRes.data)))
+		} else { store.dispatch(setQuestion(res.data)); }
 	})
+	.catch(console.error("Can't get question"));
 }
 
 ReactDOM.render(
