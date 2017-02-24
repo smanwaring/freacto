@@ -1,18 +1,18 @@
 import React from 'react';
 import {combineReducers} from 'redux';
+import {SET_QUESTION} from '../components/Question';
 
-const testReducer = function(state = '', action) {
+const questionReducer = function(state = {}, action) {
 	switch (action.type){
-		case 'test':
-			return action.payload;
+		case SET_QUESTION:
+			return action.question;
 		default: return state;
 	}
 };
 
 
-
 const rootReducer = combineReducers({
-    test: testReducer,
+    question: questionReducer,
 });
 
 export default rootReducer;
