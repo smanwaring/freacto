@@ -13,7 +13,8 @@ questionsRouter.get('/', (req, res, next) => {
 // get current question
 questionsRouter.get('/current', (req, res, next) => {
   db.model('question').findOne({
-    where: { current: true}
+    include: [{ model: db.model('answer')}],
+    where: { current: true }
   }).then(question => {
     res.json(question)})
   .catch(next);
@@ -29,6 +30,7 @@ questionsRouter.get('/:id', (req, res, next) => {
 // make a question the current question
 questionsRouter.put('/current', (req, res, next) => {
   db.model('question').find({
+    include: [{ model: db.model('answer')}],
     where: { asked: false },
     order: [ Sequelize.fn('RANDOM')]
   }).then(question => {
