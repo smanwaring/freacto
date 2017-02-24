@@ -1,18 +1,10 @@
 import React from 'react';
 import {combineReducers} from 'redux';
-
-const testReducer = function(state = '', action) {
-	switch (action.type){
-		case 'test':
-			return action.payload;
-		default: return state;
-	}
-};
-
+import loggedInUser from './reducers/login';
 
 
 const rootReducer = combineReducers({
-    test: testReducer,
+	loggedInUser
 });
 
 export default rootReducer;
