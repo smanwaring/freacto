@@ -23,6 +23,13 @@ const Question = db.define('question', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
+  current: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  dateAsked: {
+    type: Sequelize.DATE,
+  },
   difficulty: {
     type: Sequelize.ENUM,
     values: ["easy", "medium", "hard"]
