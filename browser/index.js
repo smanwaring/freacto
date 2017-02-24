@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRoute, IndexRedirect } from 'react-router';
 import store from './store';
 import axios from 'axios';
-import setQuestion from './components/Question';
+import {findQuestion} from './reducers/question'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AuthService from './utils/AuthService';
@@ -24,14 +24,7 @@ import { findOrCreateUser } from './reducers/login';
 
 /*--------- ON-ENTER HOOKS ---------- */
 const getQuestion = () => {
-	axios.get('/current')
-	.then(res => {
-		if (!res.data) {
-			axios.put('/current')
-			.then(newRes => store.dispatch(setQuestion(newRes.data)))
-		} else { store.dispatch(setQuestion(res.data)); }
-	})
-	.catch(console.error("Can't get question"));
+	store.dispatch(findQuestion())
 }
 
 const requireAuth = (nextState, replace) => {

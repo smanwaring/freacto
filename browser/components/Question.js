@@ -1,7 +1,7 @@
 import React from 'react';
 
 /* -----------------    ACTIONS     ------------------ */
-const SET_QUESTION = 'SET_QUESTION';
+export const SET_QUESTION = 'SET_QUESTION';
 
 /* -----------------    ACTION CREATORS     ------------------ */
 export const setQuestion = (question) => {

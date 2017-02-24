@@ -18,6 +18,7 @@ questionsRouter.get('/:id', (req, res, next) => {
 
 // get current question
 questionsRouter.get('/current', (req, res, next) => {
+  console.log("In get current route")
   db.model('question').findOne({
     where: { current: true}
   }).then(question => res.json(question))
@@ -26,9 +27,11 @@ questionsRouter.get('/current', (req, res, next) => {
 
 // make a question the current question
 questionsRouter.put('/current', (req, res, next) => {
-  db.model('question').find({
-    where: { asked: false },
-    order: [ Sequeilze.fn('RAND')]
+  console.log("In put current route")
+  db.model('question').findById({
+    where: { id: 1,
+      asked: false },
+    //order: [ Sequeilze.fn('RAND')]
   }).then(question => {
     return question.update({ current: true, date: Date.now(), asked: true })
   }).then(currentQuestion => res.status(201).json(currentQuestion))
