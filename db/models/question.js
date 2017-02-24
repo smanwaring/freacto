@@ -17,7 +17,7 @@ const Question = db.define('question', {
     }
   },
   category: {
-    type: Sequelize.STRING  
+    type: Sequelize.STRING
   },
   asked: {
     type: Sequelize.BOOLEAN,

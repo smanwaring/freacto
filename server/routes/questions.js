@@ -1,11 +1,21 @@
 const express = require('express');
 const questionsRouter = express.Router();
 const db = require('../../db');
+const Sequelize = require('sequelize');
 
 // get all questions
 questionsRouter.get('/', (req, res, next) => {
   db.model('question').findAll()
   .then(questions => res.json(questions))
+  .catch(next);
+})
+
+// get current question
+questionsRouter.get('/current', (req, res, next) => {
+  db.model('question').findOne({
+    where: { current: true}
+  }).then(question => {
+    res.json(question)})
   .catch(next);
 })
 
@@ -16,19 +26,11 @@ questionsRouter.get('/:id', (req, res, next) => {
   .catch(next);
 })
 
-// get current question
-questionsRouter.get('/current', (req, res, next) => {
-  db.model('question').findOne({
-    where: { current: true}
-  }).then(question => res.json(question))
-  .catch(next);
-})
-
 // make a question the current question
 questionsRouter.put('/current', (req, res, next) => {
   db.model('question').find({
     where: { asked: false },
-    order: [ Sequeilze.fn('RAND')]
+    order: [ Sequelize.fn('RANDOM')]
   }).then(question => {
     return question.update({ current: true, date: Date.now(), asked: true })
   }).then(currentQuestion => res.status(201).json(currentQuestion))
