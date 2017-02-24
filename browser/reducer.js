@@ -1,11 +1,12 @@
 import React from 'react';
 import {combineReducers} from 'redux';
-import {questionReducer} from './reducers/question';
+import { questionReducer, questionPostedReducer } from './reducers/question';
 import loggedInUser from './reducers/login';
 
 const rootReducer = combineReducers({
     question: questionReducer,
-	  loggedInUser
+	  loggedInUser,
+      questionPostedReducer
 });
 
 export default rootReducer;
