@@ -1,0 +1,23 @@
+
+body {
+  background-color: #1565c0;
+}
+
+.login-center{
+  position: absolute;
+  margin-top: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 600px;
+  height: 100px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.login-text {
+  color: white;
+}

@@ -37,7 +37,7 @@ ReactDOM.render(
 		<MuiThemeProvider>
 	    <Router history={browserHistory}>
 				<Route path="/" component={Root} auth={auth}>
-					<Route path="/home" component={Homepage} onEnter={requireAuth}>
+					<Route path="/home" component={Homepage} onEnter={requireAuth} />
 					<Route path="/login" component={Login} />
 					<IndexRedirect to="/login" />
 				</Route>
