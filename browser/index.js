@@ -4,16 +4,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute, IndexRedirect } from 'react-router';
 import store from './store';
 import axios from 'axios';
 import setQuestion from './components/Question';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AuthService from './utils/AuthService';
 
-
+const auth = new AuthService('tI3Yb8b6o4t7iOXLO4vffTYVpsHptMjl', 'stephaniemanwaring.auth0.com');
 /*------ COMPONENTS/CONTAINERS ------ */
 import Root from './components/Root';
 import Homepage from './components/Homepage';
+import Login from './components/Login';
 
+
+/*--------- ACTION CREATORS --------- */
+import { findOrCreateUser } from './reducers/login';
+
+/*--------- ON-ENTER HOOKS ---------- */
 const getQuestion = () => {
 	axios.get('/current')
 	.then(res => {
@@ -25,13 +34,29 @@ const getQuestion = () => {
 	.catch(console.error("Can't get question"));
 }
 
+const requireAuth = (nextState, replace) => {
+  if (!auth.loggedIn()) {
+    replace({ pathname: '/login' });
+  } else {
+		const user = auth.getProfile();
+		const userDetails = {
+				name: `${user.given_name} ${user.family_name}`,
+				email: user.email
+		};
+		store.dispatch(findOrCreateUser(userDetails))
+	}
+};
+
 ReactDOM.render(
   <Provider store={store}>
-	    <Router history={hashHistory}>
-			<Route component={Root}>
-				<Route path="/" component={Homepage} onEnter={getQuestion}/>
-				<IndexRoute component={Homepage}/>
-			</Route>
-		</Router>
+		<MuiThemeProvider>
+	    <Router history={browserHistory}>
+				<Route path="/" component={Root} auth={auth}>
+					<Route path="/home" component={Homepage} onEnter={requireAuth, getQuestion} />
+					<Route path="/login" component={Login} />
+					<IndexRedirect to="/login" />
+				</Route>
+			</Router>
+		</MuiThemeProvider>
   </Provider>,
   document.getElementById('app'));

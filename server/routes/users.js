@@ -16,12 +16,26 @@ usersRouter.get('/:id', (req, res, next) => {
   .catch(next);
 })
 
-// create a user
+// when a user logs in with google, find or create that user
 usersRouter.post('/', (req, res, next) => {
-  db.model('user').create(req.body)
-  .then(user => res.status(201).json(user))
+  db.model('user').findOrCreate({
+    where: {
+      email: req.body.email,
+    },
+    defaults: {
+      name: req.body.name,
+      authId: req.body.authId
+    }
+  })
+  .spread((user, wasCreated) => {
+    if (wasCreated){
+      res.status(201).json(user);
+    } else {
+      res.json(user);
+    }
+  })
   .catch(next);
-})
+});
 
 // update a user
 usersRouter.put('/:id', (req, res, next) => {

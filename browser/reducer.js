@@ -10,9 +10,11 @@ const questionReducer = function(state = {}, action) {
 	}
 };
 
+import loggedInUser from './reducers/login';
 
 const rootReducer = combineReducers({
     question: questionReducer,
+	  loggedInUser
 });
 
 export default rootReducer;
